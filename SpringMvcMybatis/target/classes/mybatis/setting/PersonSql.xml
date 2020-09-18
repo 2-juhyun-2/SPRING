@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="person">
+	<select id="selectAllOfPerson" resultType="pdto">
+		select * from person order by num asc
+	</select>
+	
+	 <insert id="insertOfPerson" parameterType="pdto">
+   insert into person values(seq1.nextval,#{name},#{age},#{addr},sysdate)
+  </insert>
+  
+  <select id="selectByNumOfPerson" resultType="pdto" parameterType="String">
+  	select * from person where num=#{num}  	
+  </select>
+  
+  <update id="updateOfPerson" parameterType="pdto">
+  	update person set name=#{name}, age=#{age}, addr=#{addr} where num=#{num}
+  </update>
+  
+  <delete id="deleteOfPerson" parameterType="pdto">
+  	delete from person where num=#{num}
+  </delete>
+	
+</mapper>
