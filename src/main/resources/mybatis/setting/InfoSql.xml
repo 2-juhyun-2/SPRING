@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="info">
+	<select id="selectAllDatasOfInfo" resultType="idto">
+		select * from myinfo order by num asc 
+	</select>
+	<insert id="insertOfInfo" parameterType="idto" >
+		insert into myinfo values(seq1.nextval,#{name}, #{addr})
+	</insert>
+	<select id="selectOneOfInfo" parameterType="String" resultType="idto">
+		select * from myinfo where num=#{num}
+	</select>
+	<update id="updateOfInfo" parameterType="idto">
+		update myinfo set name=#{name}, addr=#{addr} where num=#{num}
+	</update>
+	<delete id="deleteOfInfo" parameterType="String">
+		delete from myinfo where num=#{num}
+	</delete>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="guest">
+	<insert id="insertOfGuest" parameterType="gdto">
+		insert into springguest values(seq1.nextval,#{writer},#{imagename},#{content},0,sysdate)
+	</insert>
+	
+<!-- 페이징처리,전체개수 -->
+<select id="selectPagingofGuest" parameterType="HashMap" resultType="gdto">
+  <![CDATA[
+   select a.* from (select ROWNUM as RNUM,b.* from
+   (select * from springguest order by num desc)b)a
+   where a.RNUM>=#{start} and a.RNUM<=#{end}
+  ]]>
+ </select>
+ 
+ <select id="guestTotalCount" resultType="int">
+   select count(*) from springguest
+ </select>
+ 
+<delete id="deleteOfGuest">
+	delete from springguest where num=#{num}
+</delete>
+
+<select id="guestSelectOneByNum" parameterType="int" resultType="gdto">
+	select * from springguest where num=#{num}
+</select>
+
+</mapper>

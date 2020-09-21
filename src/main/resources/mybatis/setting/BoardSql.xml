@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+  <select id="TotalCountOfBoard" resultType="int">
+    select count(*) from springboard
+  </select>
+  
+  <insert id="InsertOfBoard" parameterType="bdto">
+	insert into springboard values(seq_b.nextval,#{writer},#{subject},#{content},0,sysdate)
+  </insert>
+  
+  <select id="selectpagingofboard" parameterType="HashMap" resultType="bdto">
+  <![CDATA[
+   select a.* from (select ROWNUM as RNUM,b.* from
+   (select * from springboard order by num desc)b)a
+   where a.RNUM>=#{start} and a.RNUM<=#{end}
+  ]]>
+ </select>
+ 
+ <update id="boardUpdateReadcount" parameterType="int">
+ 	update springboard set readcount=readcount+1 where num =#{num}
+ </update>
+ 
+ <select id="selectOneOfBoard" parameterType="int" resultType="bdto">
+ 	select * from springboard where num=#{num}
+ </select>
+ 
+ <delete id="deleteOfBoard" parameterType="int">
+ 	delete from springboard where num=#{num}
+ </delete>
+ 
+ <update id="updateOfBoard" parameterType="bdto">
+	update springboard set writer=#{writer}, subject=#{subject}, content=#{content} where num=#{num} 
+ </update>
+  
+  
+  
+</mapper>
