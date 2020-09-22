@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="upload">
+	<select id="selectCountOfUpload" resultType="int">	
+		select count(*) from imageguest		
+	</select>
+	<select id="selectAllOfUpload" resultType="udto">
+	 select * from imageguest order by num desc
+	</select>
+	<insert id="insertOfUpload" parameterType="udto">
+	 insert into imageguest values(seq_b.nextval,#{writer},#{photoname},#{content},sysdate)
+	</insert>
+	<delete id="deleteOfUpload" parameterType="udto">
+      delete from imageguest where num=#{num}
+   </delete>
+   
+   <select id="selectOneOfUpload" parameterType="String" resultType="udto">
+      select * from imageguest where num=#{num}
+   </select>
+   
+   <update id="updateOfUpload" parameterType="udto">
+      update imageguest set writer=#{writer}, photoname=#{photoname}, content=#{content} where num=#{num}
+   </update>
+</mapper>
+
